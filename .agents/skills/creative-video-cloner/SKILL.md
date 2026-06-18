@@ -5,7 +5,7 @@ description: Recreates a high-end streetwear lookbook video by naturally blendin
 
 # Creative Video Cloner (Human-Product Composite Lookbook)
 
-An advanced, end-to-end automation skill designed to analyze a fashion lookup video, extract its cinematic style, and synthesize a new 9:16 portrait branding video. It seamlessly integrates a client's product (e.g., a Coca-Cola can) into the hands of the reference video's human models, maintaining high-fidelity style cohesion.
+An advanced, end-to-end automation skill designed to analyze a branding video, extract its cinematic style, and synthesize a new 9:16 portrait branding video. It seamlessly integrates a client's product (e.g., a Coca-Cola can) into the hands of the reference video's human models, maintaining high-fidelity style cohesion.
 
 ---
 
