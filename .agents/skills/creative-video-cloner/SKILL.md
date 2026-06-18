@@ -1,16 +1,16 @@
 ---
 name: creative-video-cloner
-description: Recreates a high-end streetwear lookbook video by naturally blending reference human models from a video with a custom product image using Vertex AI Imagen/Veo and FFmpeg cropping.
+description: Recreates a high-end branding video by naturally blending reference human models from a video with a custom product image using Vertex AI Imagen/Veo and FFmpeg cropping.
 ---
 
-# Creative Video Cloner (Human-Product Composite Lookbook)
+# Creative Video Cloner (Human-Product Composite Branding Video)
 
 An advanced, end-to-end automation skill designed to analyze a branding video, extract its cinematic style, and synthesize a new 9:16 portrait branding video. It seamlessly integrates a client's product (e.g., a Coca-Cola can) into the hands of the reference video's human models, maintaining high-fidelity style cohesion.
 
 ---
 
 ## 1. Overview
-The **Creative Video Cloner** automates the transition from a standard single-product advertisement to a high-end lifestyle fashion lookbook. Instead of displaying a static product, it places the product in the hands of human models under studio lighting, following the camera moves and scenes of an inspiring reference video. 
+The **Creative Video Cloner** automates the transition from a standard single-product advertisement to a high-end branding video. Instead of displaying a static product, it places the product in the hands of human models under studio lighting, following the camera moves and scenes of an inspiring reference video. 
 
 This is accomplished by:
 1. Parsing a reference MP4 video scene-by-scene using the **SEALCaM** (Subject, Environment, Action, Lighting, Camera, Movement) framework via Gemini.
@@ -59,7 +59,7 @@ The workspace is organized as follows:
 To avoid wasting computational resources and project budget on undesired aesthetics, the agent must adhere to the following strict checkpoints:
 1. **Checkpoint 1: Prompt Strategy Approval (Manual)**
    - **When**: After Step 1 (Video Analysis) and Step 2 (Tracker Sync).
-   - **Action**: Present the generated `outputs/scenes_prompts.yaml` and the target lookbook mapping (Subject vs. Prop/Accessory) to the user. Do **not** proceed to image generation until the user explicitly reviews and approves the prompts.
+   - **Action**: Present the generated `outputs/scenes_prompts.yaml` and the target branding video mapping (Subject vs. Prop/Accessory) to the user. Do **not** proceed to image generation until the user explicitly reviews and approves the prompts.
 2. **Checkpoint 2: Budget Transparency Approval (Interactive)**
    - **When**: Prior to starting image generation (`generate_images.py`) and video generation (`generate_videos.py`).
    - **Action**: The script must output the estimated Vertex AI API cost (e.g., "$0.36 for 4 scenes of images", "$12.80 for 4 scenes of 8s videos") and ask: *"Do you approve this budget and wish to proceed?"* This check can only be bypassed using the `--yes` or `-y` CLI flags if executing in a fully automated, non-interactive environment.
@@ -254,7 +254,7 @@ python3 tools/combine_all.py
 Ensure GCS buckets and GCP SDK credentials are set up. Then run:
 
 ```bash
-# 1. Analyze your reference lookbook video
+# 1. Analyze your reference branding video
 python3 tools/analyze_video.py inputs/my_reference.mp4 -o outputs/youtube_analysis.yaml
 
 # 2. Write your scenes_prompts.yaml with human-product interactions and sync
@@ -269,7 +269,7 @@ python3 tools/generate_videos.py --yes
 # 5. Compile into the final master cut
 python3 tools/combine_all.py
 ```
-Your high-end, customized composite lookbook video will be compiled and saved to `outputs/final_video.mp4`!
+Your high-end, customized composite branding video will be compiled and saved to `outputs/final_video.mp4`!
 
 ---
 
