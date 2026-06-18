@@ -1,0 +1,64 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+ENV/local/
+ENV/packages/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*~
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Project-specific paths
+# Ignore credentials/keys in the .agents/ folder, but DO NOT ignore the config files (.agents/skills, .agents/rules, .agents/project_context.md)
+.agents/.env
+
+# Ignore user input assets (large reference videos, product images, etc.) but preserve the directory on Git
+inputs/*
+!inputs/.gitkeep
+
+# Ignore all generated outputs (rendered videos, synthesized images, Excel sheets, project databases) but preserve the directory on Git
+outputs/*
+!outputs/.gitkeep
+
+# Antigravity system files & caches
+.gemini/
