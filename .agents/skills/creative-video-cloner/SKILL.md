@@ -43,7 +43,38 @@ The workspace is organized as follows:
 
 ---
 
-## 3. Critical Rules & Constraints
+## 3. Dynamic Asset-Matching & Adaptive Composition Matrix
+
+Because the exact type of reference video and brand product image provided by the user is unpredictable, the Antigravity agent must never assume the input is always a fashion editorial or a beverage can. Instead, the agent must dynamically analyze the semantic categories of both assets and formulate an adaptive mapping strategy.
+
+### 📋 Asset Analysis & Strategy Formulation Protocol
+
+Before starting generation, the agent must perform a **two-way semantic mapping analysis**:
+1. **Analyze Client Product**: Use Gemini to identify the product's type (e.g., beverage can, cosmetics bottle, handbag, sneakers, sunglasses, smart watch) and its typical usage posture (held, worn, carried, applied).
+2. **Analyze Reference Video**: Analyze the reference video to identify the primary human subjects and their placeholder props (e.g., holding a book, holding a coffee cup, carrying a canvas bag, wearing local sneakers).
+3. **Formulate Mapping Relation**: Pair the product with the best candidate placeholder in the video, applying the **Dynamic Composition Matrix** below.
+
+### 🗺️ Dynamic Composition Matrix
+
+Use this matrix to guide prompt generation and image synthesis for any arbitrary inputs:
+
+| Client Product Class | Reference Placeholder Prop | Composition & Prompt Synthesis Action | Example Prompt Instruction |
+| :--- | :--- | :--- | :--- |
+| **Beverage Can / Bottle** | Cup, Mug, Can, Small Box | Replace the placeholder with the custom beverage can/bottle. Describe fingers wrapping naturally around the cylinder. | "model holding a sleek beverage can, fingers wrapping naturally around its metal surface, condensation droplets" |
+| **Cosmetics / Beauty Bottle** | Perfume, vial, small tube, cup | Replace with the cosmetic container. Emphasize a premium skincare aesthetic and clean studio lighting on the bottle face. | "model holding a luxury glass serum bottle, the brand name clearly visible, soft studio light catching the liquid within" |
+| **Handbag / Backpack** | Handbag, purse, shopping bag, book | Replace the placeholder bag or held item with the brand's bag. Maintain authentic strap hanging angles on the model's shoulder. | "model walking gracefully, carrying a high-end designer leather handbag over her forearm, maintaining authentic strap fold" |
+| **Tech Gadget (Phone/Watch)** | Phone, card, notepad, calculator | Replace with the brand's device. Match screen light reflections on the model's face and natural hand-holding tilt. | "model looking at a premium smart watch on her wrist, screen glowing with a sleek UI, soft ambient blue light on the face" |
+| **Footwear / Shoes** | Shoes, boots, bare feet | Replace the reference shoe with the brand's footwear. Match the running/walking foot mechanics and ground contact. | "close-up of model's feet in motion, wearing the new brand high-performance sneakers, rubber soles compressing against concrete" |
+| **Apparel (T-shirt/Jacket)** | Shirt, jacket, hoodie, coat | Overlay or replace the upper body apparel. Describe the brand's fabric texture (cotton, leather) and authentic clothing folds. | "model wearing a premium streetwear hoodie with custom logo detailing on the chest, realistic fabric folds and shadows" |
+
+### 🛠️ Prompt Synthesis Rules for Arbitrary Inputs
+* **Rule 1: Proportional Scaling**: Ensure the size of the product remains physically realistic relative to the model's hand or body (e.g., do not scale a beverage can to the size of a suitcase).
+* **Rule 2: Grip Realism**: Explicitly describe how the model interacts with the product (e.g., "holding firmly with index finger along the rim," "wearing snugly on the wrist").
+* **Rule 3: Stylistic Blending**: Describe product textures and reflections using terms that blend with the background lighting of the reference video (e.g., "metallic reflections reflecting the warm evening sun of the street scene").
+
+---
+
+## 4. Critical Rules & Constraints
 
 ### ⚠️ GCS Retention Lock & Filename Collisions
 * **CRITICAL RULE**: Due to strict Google Cloud Storage (GCS) bucket retention policies, existing files uploaded to GCS cannot be overwritten. 
@@ -81,7 +112,7 @@ To avoid wasting computational resources and project budget on undesired aesthet
 
 ---
 
-## 4. Step-by-Step Process
+## 5. Step-by-Step Process
 
 ```mermaid
 sequenceDiagram
@@ -149,7 +180,7 @@ python3 tools/combine_all.py
 
 ---
 
-## 5. Available Tools
+## 6. Available Tools
 
 ### 1. `tools/analyze_video.py`
 * **Purpose**: Performs a scene-by-scene analysis using the SEALCaM framework.
@@ -184,7 +215,7 @@ python3 tools/combine_all.py
 
 ---
 
-## 6. API & Integration Details
+## 7. API & Integration Details
 
 ### Vertex AI Imagen 3 (Image Generation)
 * **Model**: `gemini-2.5-flash-image` (fallback from `gemini-3.1-flash-image`)
@@ -220,7 +251,7 @@ python3 tools/combine_all.py
 
 ---
 
-## 7. Database & Storage Schema
+## 8. Database & Storage Schema
 
 ### JSON Database (`outputs/project_data.json`)
 ```json
@@ -249,7 +280,7 @@ python3 tools/combine_all.py
 
 ---
 
-## 8. Quick Start
+## 9. Quick Start
 
 Ensure GCS buckets and GCP SDK credentials are set up. Then run:
 
@@ -273,7 +304,7 @@ Your high-end, customized composite branding video will be compiled and saved to
 
 ---
 
-## 9. Troubleshooting & Lessons Learned
+## 10. Troubleshooting & Lessons Learned
 
 When orchestrating or refining this pipeline, future agents and developers should keep the following critical troubleshooting insights in mind. These represent actual edge cases resolved during the initial system building.
 
